@@ -1,0 +1,137 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "format file (uncrustify)",
+			"type": "shell",
+			"linux": {
+				"command": "uncrustify",
+				"args": [
+					"--replace",
+					"--no-backup",
+					"-l",
+					"C",
+					"-c",
+					"${env:ZEPHYR_BASE}/.uncrustify.cfg",
+					"${file}"
+				]
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "check code style file (checkpatch)",
+			"type": "shell",
+			"command": "${env:ZEPHYR_BASE}/checkpatch.pl",
+			"args": [
+				"--no-tree",
+				"-f",
+				"${file}"
+			],
+			"problemMatcher": [],
+			"options": {
+				"cwd": "${env:ZEPHYR_BASE}"
+			}
+		},
+		{
+			"label": "check code style file fix inplace (checkpatch)",
+			"type": "shell",
+			"command": "${env:ZEPHYR_BASE}/scripts/checkpatch.pl",
+			"args": [
+				"--no-tree",
+				"-f",
+				"${file}",
+				"--fix-inplace"
+			],
+			"problemMatcher": [],
+			"options": {
+				"cwd": "${env:ZEPHYR_BASE}"
+			}
+		},
+		{
+			"label": "rebuild",
+			"type": "shell",
+			"group": "build",
+			"linux": {
+				"command": "west",
+				"args": [
+					"build",
+					"-p",
+					"auto",
+					"-b",
+					"${config:BOARD}",
+					"${config:PROJECT}",
+					"--",
+					"-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+				]
+			},
+			"problemMatcher": {
+				"source": "west-build",
+				"base": "$gcc",
+				"fileLocation": [
+					"autodetect",
+					"${workspaceFolder}/build"
+				]
+			}
+		},
+		{
+			"label": "rebuild debug",
+			"type": "shell",
+			"group": "build",
+			"linux": {
+				"command": "west",
+				"args": [
+					"build",
+					"-p",
+					"auto",
+					"-b",
+					"${config:BOARD}",
+					"${config:PROJECT}",
+					"--",
+					"-DOVERLAY_CONFIG=${workspaceFolder}/debug.conf",
+					"-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+				]
+			},
+			"problemMatcher": {
+				"source": "west-build",
+				"base": "$gcc",
+				"fileLocation": [
+					"autodetect",
+					"${workspaceFolder}/build"
+				]
+			}
+		},
+		{
+			"label": "build",
+			"type": "shell",
+			"group": "build",
+			"linux": {
+				"command": "west",
+				"args": [
+					"build"
+				]
+			},
+			"problemMatcher": {
+				"source": "west-build",
+				"base": "$gcc",
+				"fileLocation": [
+					"autodetect",
+					"${workspaceFolder}/build"
+				]
+			}
+		},
+		{
+			"label": "clean",
+			"type": "shell",
+			"group": "build",
+			"linux": {
+				"command": "rm",
+				"args": [
+					"-rf",
+					"${workspaceFolder}/build"
+				]
+			},
+			"problemMatcher": []
+		},
+
+	]
+}

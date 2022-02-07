@@ -1,0 +1,16 @@
+{
+    "BOARD": "nucleo_wl55jc",
+    "PROJECT": "${workspaceRoot}",
+	"cortex-debug.armToolchainPrefix": "arm-zephyr-eabi",
+    "cortex-debug.armToolchainPath": "/home/jin/Applications/zephyrproject/zephyr-sdk/arm-zephyr-eabi/bin/",
+    "files.associations": {
+        "zephyr.h": "c",
+        "kernel.h": "c",
+        "kernel_includes.h": "c",
+        "types.h": "c",
+        "stdint.h": "c",
+        "poll.h": "c",
+        "device.h": "c",
+        "threads.h": "c"
+    },
+}

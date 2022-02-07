@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "showDevDebugOutput": "both",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/zephyr/zephyr.elf",
+            "name": "debug zephyr",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "device": "stlink",
+            "configFiles": [
+                "openocd.cfg"
+            ]
+        }
+    ]
+}
